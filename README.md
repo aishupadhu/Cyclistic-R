@@ -73,7 +73,7 @@ set matched.</p>
 }</code></pre>
 <p>Combine the 12 data set into one big data frame.</p>
 <pre class="r"><code>Combined_trips &lt;- bind_rows(c2021_05, c2021_06, c2021_07, c2021_08, c2021_09, c2021_10, c2021_11, c2021_12, c2022_01, c2022_02, c2022_03, c2022_04)</code></pre>
-<p>Checked the first few rows and the last few rows of the big data set.
+<p>Checked the first few rows of the big data set.
 Made sure the count of the number of rows created in the new copy is the
 same as the combined data sets.</p>
 <pre class="r"><code>head(Combined_trips)</code></pre>
@@ -212,20 +212,19 @@ Combined_trips_copy %&gt;%
 <h4>Data findings with visualizations</h4>
 <p>The following visualizations were built to analyze how members and
 casual riders use bikes differently. Ride counts and ride lengths were
-analyzed by user type as well as by ride start location, time of the
-day, month/quarter, and day of the week.</p>
+analyzed by user type as well as, time of the day, month, and day of the week.</p>
 <p>Comparing member/casual riders and day of the week.</p>
 <pre class="r"><code>Combined_trips_copy %&gt;%
   group_by(member_casual, day_of_the_week) %&gt;%
   summarise(rides = n()) %&gt;%
   arrange (member_casual, day_of_the_week) %&gt;%
   ggplot(aes(x= day_of_the_week, y = rides, fill = member_casual)) + geom_col(position = &quot;dodge&quot;) + 
-  labs(x= &#39;Day of the Week&#39;, y=&#39;Total Number of Rides&#39;, title= &#39;Rides per Day of Week&#39;, fill = &#39;Type of Membership&#39;) +
+  labs(x= &#39;Day of the Week&#39;, y=&#39;Total Number of Rides&#39;, title= &#39;Rides by Day of the Week&#39;, fill = &#39;Type of Membership&#39;) +
   scale_y_continuous(breaks = c(250000, 400000, 550000), labels = c(&quot;250k&quot;, &quot;400k&quot;, &quot;550k&quot;))</code></pre>
 <pre><code>## `summarise()` has grouped output by &#39;member_casual&#39;. You can override using the
 ## `.groups` argument.</code></pre>
 <p><img src="img/1_RidesByDayOfWeek.png" width="672" /></p>
-<p>Comparing member/casual and the month of the year. This charts below,
+<p>Comparing members/casual riders and the month of the year. This chart below,
 shows how ridership varies across months between casual riders and
 members. Casual ridership seems to peak during the summer months while
 dropping off significantly in winter. While members’ ridership drops off
@@ -270,7 +269,7 @@ by the riders. It shows the usage of the bikes for the rides.</p>
 <h4>Conclusion</h4>
 <p>This Cyclistic Bike trips analysis with R, yielded valuable insights
 that the marketing team at Cyclistic can leverage to design their
-marketing campaigns. From the standpoint of the data analysis team, the
+marketing campaigns. We were able to visualize the data and understand the hours the casual riders use the most. Also we have identified the months there were the most casual users. From the standpoint of the data analysis team, the
 following can be potential next steps:</p>
 <ul>
 <li><p>Supporting the marketing team in tracking the effectiveness of
